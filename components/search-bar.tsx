@@ -78,7 +78,6 @@ export function SearchBar({ onSearch, isLoading = false }: SearchBarProps) {
               transition={{ duration: 0.2 }}
             >
               <motion.div
-                animate={{ rotate: 360 }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
               >
                 <Search className="h-4 w-4" />
