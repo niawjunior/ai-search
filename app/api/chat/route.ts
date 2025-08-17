@@ -1,8 +1,12 @@
-import { openai } from "@ai-sdk/openai";
+// import { openai } from "@ai-sdk/openai";
 import { convertToModelMessages, streamText, UIMessage } from "ai";
 import z from "zod";
 import { searchProducts } from "@/lib/vector-utils";
+import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 
+const openrouter = createOpenRouter({
+  apiKey: process.env.OPENROUTER_API_KEY,
+});
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
@@ -10,7 +14,7 @@ export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: openai("gpt-4.1"),
+    model: openrouter.chat("openai/gpt-oss-20b"),
     system: `You are a product search assistant for an e-commerce store. Your primary role is to help users find products using semantic search technology. You have access to a database of products with names, descriptions, and images stored in Supabase with pgvector for similarity search.
 
 When responding to users:

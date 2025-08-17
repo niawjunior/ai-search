@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^5.2.1",
     "@langchain/community": "^0.3.51",
     "@langchain/openai": "^0.6.7",
+    "@openrouter/ai-sdk-provider": "^1.1.2",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-scroll-area": "^1.2.10",
