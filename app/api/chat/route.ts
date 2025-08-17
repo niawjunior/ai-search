@@ -36,7 +36,7 @@ Your goal is to create a seamless product discovery experience through natural c
 
             // Get search results with default parameters
             const limit = 10;
-            const minScore = 0.1;
+            const minScore = 0.7;
             const filter = {};
 
             console.log("Searching for products with query:", query);

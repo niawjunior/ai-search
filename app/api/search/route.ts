@@ -15,7 +15,7 @@ export async function GET(request: Request) {
 
     // Get search parameters with defaults
     const limit = Number(searchParams.get("limit") || 20); // Increased default limit
-    const minScore = Number(searchParams.get("minScore") || 0.1); // Minimum relevance threshold
+    const minScore = Number(searchParams.get("minScore") || 0.7); // Minimum relevance threshold
 
     // Optional filter parameters
     const filterCategory = searchParams.get("category") || null;

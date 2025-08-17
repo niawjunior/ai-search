@@ -195,6 +195,11 @@ export function ChatBox({ onFinished }: ChatBoxProps) {
                                     </Badge>
                                   </li>
                                 ))}
+                                {part.output?.length === 0 && (
+                                  <li className="flex flex-col gap-1 bg-muted p-2">
+                                    No products found
+                                  </li>
+                                )}
                               </ul>
                             )}
                           </div>

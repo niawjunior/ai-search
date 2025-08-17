@@ -54,7 +54,7 @@ export async function searchProducts(
   query: string,
   limit = 10,
   filter = {},
-  minScore = 0.1
+  minScore = 0.7
 ) {
   try {
     const client = createSupabaseAdminClient();
