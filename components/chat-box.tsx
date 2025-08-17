@@ -165,6 +165,14 @@ export function ChatBox({ onFinished }: ChatBoxProps) {
                                     : "bg-muted"
                                 }`}
                               >
+                                {status === "streaming" &&
+                                  msg.id ===
+                                    messages[messages.length - 1].id && (
+                                    <div className="flex items-center gap-2">
+                                      <div className="animate-pulse h-2 w-2 rounded-full bg-primary"></div>
+                                      <span>Tool is searching...</span>
+                                    </div>
+                                  )}
                                 {part.output?.map((product: any) => (
                                   <li
                                     key={product.id}
