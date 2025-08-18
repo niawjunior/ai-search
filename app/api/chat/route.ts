@@ -1,21 +1,9 @@
-// import { openai } from "@ai-sdk/openai";
+import { openai } from "@ai-sdk/openai";
 import { convertToModelMessages, streamText, UIMessage } from "ai";
 import z from "zod";
 import { searchProducts } from "@/lib/vector-utils";
-import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 
-const openrouter = createOpenRouter({
-  apiKey: process.env.OPENROUTER_API_KEY,
-});
-// Allow streaming responses up to 30 seconds
-export const maxDuration = 30;
-
-export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
-
-  const result = streamText({
-    model: openrouter.chat("openai/gpt-oss-20b"),
-    system: `You are a product search assistant for an e-commerce store. Your primary role is to help users find products using semantic search technology. You have access to a database of products with names, descriptions, and images stored in Supabase with pgvector for similarity search.
+const system = `You are a product search assistant for an e-commerce store. Your primary role is to help users find products using semantic search technology. You have access to a database of products with names, descriptions, and images stored in Supabase with pgvector for similarity search.
 
 When responding to users:
 1. Focus on helping them find products based on their queries
@@ -25,7 +13,17 @@ When responding to users:
 5. Suggest refining search terms if results aren't what the user is looking for
 6. Format product listings in a clear, readable way with product names in bold
 
-Your goal is to create a seamless product discovery experience through natural conversation.`,
+Your goal is to create a seamless product discovery experience through natural conversation.`;
+
+// Allow streaming responses up to 30 seconds
+export const maxDuration = 30;
+
+export async function POST(req: Request) {
+  const { messages }: { messages: UIMessage[] } = await req.json();
+
+  const result = streamText({
+    model: openai("gpt-4o-mini"),
+    system,
     messages: convertToModelMessages(messages),
     tools: {
       search: {
@@ -35,10 +33,6 @@ Your goal is to create a seamless product discovery experience through natural c
         }),
         execute: async ({ query }: { query: string }) => {
           try {
-            // Directly use the searchProducts function instead of making a server-side fetch
-            // This avoids URL encoding issues and is more efficient
-
-            // Get search results with default parameters
             const limit = 10;
             const minScore = 0.7;
             const filter = {};
@@ -51,7 +45,6 @@ Your goal is to create a seamless product discovery experience through natural c
               minScore
             );
 
-            // Add debug info to help understand relevance
             const resultsWithDebug = results.map((result) => ({
               ...result,
               debug: {
