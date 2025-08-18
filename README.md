@@ -1,5 +1,14 @@
 # AI Product Search Demo
 
+
+
+https://github.com/user-attachments/assets/07d89003-6d73-4c1d-9d75-e3838c51461c
+
+
+
+https://github.com/user-attachments/assets/ef7cd673-da40-4182-ad64-91b0939a2dca
+
+
 This is a demonstration project showcasing how to implement AI-powered semantic search for products using Supabase Vector Database (pgvector) and LangChain.
 
 ## Features
