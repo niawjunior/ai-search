@@ -250,7 +250,7 @@ export function ChatBox({ onFinished }: ChatBoxProps) {
                   ref={inputRef}
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Ask anything..."
+                  placeholder="Ask about products..."
                   className="min-h-10 resize-none"
                   disabled={status === "streaming" || status === "submitted"}
                   onKeyDown={(e) => {
